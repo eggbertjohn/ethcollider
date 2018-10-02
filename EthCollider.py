@@ -61,65 +61,47 @@ def compute_adr(priv_num):
 	except KeyboardInterrupt:
 		return "x"
 
-def balance():
-        global balance
-        balance = '0'
-        print 'Ethereum Collider developed by Trent Pierce (www.SkeeBomb.com)'
-	print
-	print 'To promote development, please send donations to 01171ab97216939Ddf49b8Ac9DFFE80b8178fcF6'
-	print
-        return balance
+def found():
+       	load_gtable('lib/G_Table')
+        wallets = 0
+	balance = 0
+        while True:
+        	try:
+               		privkeynum = randomforkey()
+               		address = compute_adr(privkeynum)
+                	foundprivkeynum = privkeynum
+                	wallets = wallets + 1
+                	pvhex = hexa(foundprivkeynum)
+                	# address = '56Ed8A68c1B5074522Bc681b629f27139019F63B'
+                	url = 'https://api.etherscan.io/api?module=account&action=balance&address=0x' + address + '&tag=latest&apikey=V7GSGSMWZ2CZH1B6MBXM84SZ1XG4DXDCW9';
+                	# print url
+                	r = requests.get(url)
+                	# r.text
+                	# print r.text
+                	data = json.loads(r.text)
+                	balance = data['result']
+                	print '\r'+'Searched ',wallets,' addresses 0x' + address + ' ' + pvhex
+
+                	if balance != '0':
+                        	print 'Wallet Found!'
+
+                        	print "\nAddress :  %s \n" % address
+
+                        	print "PrivKey :  %s\n" % pvhex
+
+                        	with open('money.prv', 'a+') as f:
+                                	f.write(address+ '    ' + pvhex +'    ' + balance + '\n')
+                	else:
+                        	with open('record.txt', 'a+') as f:
+                                	f.write(address+ '    ' + pvhex +'    ' + balance + '\n')
+        	except Exception as e:
+                	print str(e)
         
 if __name__ == '__main__':
-	import multiprocessing
-	p = multiprocessing.Pool(int(multiprocessing.cpu_count()))
 	import hashlib
-	import re
-	import sys
-	import time
-	import os.path
-	from lib.humtime import humanize_time
-	balance()
-	wallets = 0
-while balance == '0':
-	try:
-		if len(sys.argv) > 1:
-			arg1 = sys.argv[1]
-			assert re.match(r"^[0-9a-fA-F]{1,10}$",arg1) != None
-			searchstring = arg1.lower()
-			listwide=4*int(multiprocessing.cpu_count())*2**len(searchstring)
-			vanity = True
-	except:
-		raise ValueError("Error in argument, not a hex string or longer than 10 chars")
-	load_gtable('lib/G_Table')
-	privkeynum = randomforkey()
-	address = compute_adr(privkeynum)
-	foundprivkeynum = privkeynum
-	if 'inter' not in locals():
-                wallets = wallets + 1
-		assert compute_adr(foundprivkeynum) == address
-		pvhex = hexa(foundprivkeynum)
-		r = requests.get('https://api.etherscan.io/api?module=account&action=balance&address=' + address + '&tag=latest&apikey=V7GSGSMWZ2CZH1B6MBXM84SZ1XG4DXDCW9')
-		r.text
-		data = json.loads(r.text)
-		balance = data['result']
-		print '\r' + 'Searched ',wallets,' addresses',
-		
-                if balance != '0':
-                        print 'Wallet Found!'
-
-                        print "\nAddress :  %s \n" % address
-
-                        print "PrivKey :  %s\n" % pvhex
-                        
-		        privfileexist=False
-		        conf="n"
-		        if os.path.isfile('priv.prv'):
-			        privfileexist=True
-			        conf=raw_input("Enter 'y' to confirm overwriting priv.prv file : ")
-		        if (conf=="y" or not privfileexist):
-			        with open('priv.prv', 'wb') as f:
-				        f.write(pvhex)
-			        print "Private key exported in priv.prv file"
-			        print "Can be imported in geth : 'geth account import priv.prv'\n"
-
+        import re
+        import sys
+        import time
+        import os.path
+        from lib.humtime import humanize_time
+	found()
