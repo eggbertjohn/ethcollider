@@ -24,6 +24,8 @@
 #
 # Enter optional argument : a hex string shorter than 11 chars
 #
+# Updated 2020 
+#
 from lib.ECDSA_BTC import *
 import lib.python_sha3
 import requests
