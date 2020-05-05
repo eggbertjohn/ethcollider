@@ -1,31 +1,6 @@
 #!/usr/bin/env python
 # coding=utf8
 
-# Ethereum Collider
-# Copyright (C) 2017  Trent Pierce
-#
-# Pure Python address generator with Collision detection
-#
-# Random source for key generation :
-# CryptGenRandom in Windows
-# /dev/urandom   in Unix-like
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, version 3 of the License.
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>
-#
-# Uses python-sha3 from moshekaplan
-#
-# Enter optional argument : a hex string shorter than 11 chars
-#
-# Updated 2020 
-#
 from lib.ECDSA_BTC import *
 import lib.python_sha3
 import requests
@@ -74,15 +49,14 @@ def found():
                 	foundprivkeynum = privkeynum
                 	wallets = wallets + 1
                 	pvhex = hexa(foundprivkeynum)
-                	# address = '56Ed8A68c1B5074522Bc681b629f27139019F63B'
-                	url = 'https://api.etherscan.io/api?module=account&action=balance&address=0x' + address + '&tag=latest&apikey=V7GSGSMWZ2CZH1B6MBXM84SZ1XG4DXDCW9';
+                	url = 'http://api.etherscan.io/api?module=account&action=balance&address=0x' + address + '&tag=latest&apikey=V7GSGSMWZ2CZH1B6MBXM84SZ1XG4DXDCW9';
                 	# print url
                 	r = requests.get(url)
                 	# r.text
                 	# print r.text
                 	data = json.loads(r.text)
                 	balance = data['result']
-                	print '\r'+'Searched ',wallets,' addresses 0x' + address + ' ' + pvhex
+                	print '\r'+'Searched ',wallets,' addresses '
 
                 	if balance != '0':
                         	print 'Wallet Found!'
@@ -91,10 +65,10 @@ def found():
 
                         	print "PrivKey :  %s\n" % pvhex
 
-                        	with open('money.prv', 'a+') as f:
+                        	with open('fuckinggold.txt', 'a+') as f:
                                 	f.write(address+ '    ' + pvhex +'    ' + balance + '\n')
                 	else:
-                        	with open('record.txt', 'a+') as f:
+                        	with open('empties.txt', 'a+') as f:
                                 	f.write(address+ '    ' + pvhex +'    ' + balance + '\n')
         	except Exception as e:
                 	print str(e)
