@@ -56,8 +56,8 @@ def found():
                 	# print r.text
                 	data = json.loads(r.text)
                 	balance = data['result']
-                	print '\r'+'Searched ',wallets,' addresses '
-
+                	print '\r'+'Searched ',wallets,' addresses 0x' + address + ' ' + pvhex	
+			
                 	if balance != '0':
                         	print 'Wallet Found!'
 
