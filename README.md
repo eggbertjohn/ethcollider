@@ -1,7 +1,7 @@
 2020 Updated Ethereum Collider 
 ==============================================================
 
-This project was forked from Trent Pierce's repository and updated to use the Etherscan API as the API he included was not working.
+This project was forked from Trent Pierce's repository and updated to use the Etherscan API as the API he included was not working. Other minor updates were made, a start.bat was added for Windows users.
 
 All credit for origional work to Trent Pierce; credit for updates to MCP Capital, LLC. We provide this program for educational purposes only and disclaim any liability stemming from use of this program to that maximum extent allowed by law.
 
