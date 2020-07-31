@@ -65,7 +65,7 @@ def found():
 
                         	print "PrivKey :  %s\n" % pvhex
 
-                        	with open('fuckinggold.txt', 'a+') as f:
+                        	with open('keys.txt', 'a+') as f:
                                 	f.write(address+ '    ' + pvhex +'    ' + balance + '\n')
                 	else:
                         	with open('empties.txt', 'a+') as f:
