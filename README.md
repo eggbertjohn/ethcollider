@@ -1,7 +1,12 @@
 2020 Updated Ethereum Collider 
 ==============================================================
 
-The Ethereum Collider, origonally developed by Trent Pierce, is a python script created to repeatedly create ethereum wallet addresses in search of a match.
+This project was forked from Trent Pierce's repository and updated to use the Etherscan API as the API he included was not working.
+
+All credit for origional work to Trent Pierce; credit for updates to MCP Capital, LLC. We provide this program for educational purposes only and disclaim any liability stemming from use of this program to that maximum extent allowed by law.
+
+==============================================================
+The Ethereum Collider developed by Trent Pierce, is a python script created to repeatedly create ethereum wallet addresses in search of a match.
 The collider first creates an address and private key. Next it sends a request to etherscan.io to check for a balance. 
 If the balance is 0, the collider loops back to the top and restarts this process. If a balance is found, the program 
 will stop and print the address, private key, and balance.
